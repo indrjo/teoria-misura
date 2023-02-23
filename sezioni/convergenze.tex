@@ -1,0 +1,66 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../TM.tex
+
+\section{Convergenze}
+
+\begin{definizione}[Convergenza quasi uniforme]
+Sia \((\Omega, \mathcal A, \mu)\) uno spazio di misura. Diciamo che  una successione di funzioni misurabili \(\set{f_n : \Omega \to \erre \mid n \in \enne}\) {\em converge quasi uniformemente} a \(f : \Omega \to \erre\) qualora per ogni \(\epsilon > 0\) esiste un \(E \in \mathcal A\) per cui \(\mu(\Omega \setminus E) < \epsilon\) e \(f_n \to f\) uniformemente su \(E\) per \(n \to +\infty\).
+\end{definizione}
+
+\begin{proposizione}[Teorema di Severini-Egorov]\label{proposizione:SeveriniEgorov}\index{teorema!di Severini-Egorov}
+Sia \((\Omega, \mathcal A, \mu)\) uno spazio di misura con \(\mu(\Omega) < +\infty\) e \(\set{f_n : \Omega \to \erre \mid n \in \enne}\) una successione di funzioni misurabili. Se converge quasi ovunque a \(f : \Omega \to \erre\), allora converge quasi uniformemente a \(f\). 
+\end{proposizione}
+
+Prima di partire con la dimostrazione, è essenziale per la dimostrazione che segue osservare che sono equivalenti questi due fatti:
+\begin{enumerate}
+\item \(f : \Omega \to \erre\) converge puntualmente verso \(f : \Omega \to \erre\)
+\item per ogni \(\delta > 0\) si ha
+\[\Omega = \bigcup_{m \in \enne} \bigcap_{n \in \enne, n \ge m} \set{x \in \Omega \mid \abs{f_n(x) - f(x)} < \delta} .\]
+\end{enumerate}
+La Teoria della Misura subentra nel momento in cui ci si rende conto che che al variare di \(m \in \enne\) al successione degli insiemi
+\[\bigcap_{n \in \enne, n \ge m} \set{x \in \Omega \mid \abs{f_n(x) - f(x)} < \delta}\]
+è crescente. e che quindi si può usare il Lemma~\ref{lemma:LimitOfMeasures}.
+
+\begin{proof}[Dimostrazione della Proposizione~\ref{proposizione:SeveriniEgorov}]
+Possiamo supporre che \(f_n\) converga puntualmente per ogni \(x \in \Omega\), questo senza ledere la validità della dimostrazione: infatti se \(f_n\) non converge puntualmente su tutto \(\Omega\), allora basta rimuovere il sottoinsieme di \(\Omega\) per cui non lo fa, essendo questo per ipotesi a misura nulla.\newline
+Introduciamo dei nomi: per \(k, n \in \enne\)
+\[E_{n, k} := \set{x \in \Omega \left\mid \abs{f_n(x) - f(x)} < \frac1k \right.}\]
+Come abbiamo visto prima di iniziare la dimostrazione, abbiamo che per ogni \(k \in \enne\), gli \(E_{n, k}\) al variare di \(n \in \enne\) ricoprono \(\Omega\).
+%\[\Omega = \bigcup_{m \in \enne} \bigcap_{n \ge m} E_{n, k} .\]
+Inoltre \(\set{E_{n,k} \mid n \in \enne} \in \mathcal A\) è una successione crescente e quindi per il Lemma~\ref{lemma:LimitOfMeasures} abbiamo che
+\[\mu(\Omega) = \lim_{m \to +\infty} \mu \left(\bigcap_{n \ge m} E_{n, k}\right) .\]
+Di conseguenza, poiché \(\mu(\Omega) < +\infty\), per ogni \(k \in \enne\) possiamo scegliere \(m_k \in \enne\) in modo che
+\[\mu \left( \Omega \setminus \bigcap_{n \ge m_k} E_{n, k} \right) < \frac{\epsilon}{2^k} .\]
+Abbiamo quindi
+\[\mu \left( \Omega \setminus \bigcap_{k \in \enne} \bigcap_{n \ge m_k} E_{n, k} \right) \le \sum_{k \in \enne} \mu \left(\Omega \setminus \bigcap_{n \ge m_k} E_{n, k} \right) = \epsilon\]
+e per costruzione \(f_n\) converge uniformemente verso \(f\) su \(\displaystyle \bigcap_{k \in \enne} \bigcap_{n \ge m_k} E_{n, k}\).
+\end{proof}
+
+\begin{definizione}[Convergenza in misura]
+Sia \((\Omega, \mathcal A, \mu)\) uno spazio di misura. Diciamo che una successione di funzioni misurabili \(\set{f_n : \Omega \to \erre \mid n \in \enne}\) {\em converge in misura} a \(f : \Omega \to \erre\) qualora per ogni \(\epsilon > 0\) si ha
+\[\lim_{n \to +\infty} \mu \left( \set{x \in \Omega \mid \abs{f_n(x) - f(x)} \ge \epsilon} \right) = 0 .\]
+\end{definizione}
+
+\begin{lemma}[di Borel-Cantelli]\label{lemma:BorelCantelli}\index{lemma!di Borel-Cantelli}
+Sia \((\Omega, \mathcal A, \mu)\) uno spazio di misura e una qualsiasi successione \(\set{A_n \mid n \in \enne} \subseteq \mathcal A\). Se
+\[\sum_{n \in \enne} \mu\left(A_n\right) < +\infty\]
+allora
+\[\mu\left( \bigcap_{m \in \enne} \bigcup_{n \ge m} A_n \right) = 0 .\]
+\end{lemma}
+
+\begin{proof}
+Poiché \(\displaystyle\mu\left( \bigcup_{n \in \enne} A_n \right) < +\infty\), possiamo applicare il Lemma~\ref{lemma:LimitOfMeasures} alla successione decrescente \(\displaystyle \set{\left.\bigcup_{m \ge m} A_n \right\mid m \in \enne}\) .
+\end{proof}
+
+\begin{proposizione}
+Sia \((\Omega, \mathcal A, \mu)\) uno spazio di misura e \(\set{f_n : \Omega \to \erre \mid n \in \enne}\) una successione di funzioni misurabili convergenti in misura verso \(f : \Omega \to \erre\). Allora \(\set{f_n \mid n \in \enne}\) ha una sottosuccessione convergente verso \(f\) quasi ovunque.
+\end{proposizione}
+
+\begin{proof}
+Per ogni \(k \in \enne\) possiamo scegliere un \(n_k \in \enne\) per cui
+\[\mu \left(\set{x \in \Omega \left\mid \abs{f_{n_k}(x) - f(x)} \ge \frac1k \right. } \right) < \frac{1}{k^2} .\]
+Possiamo pertanto concludere applicando il Lemma~\ref{lemma:BorelCantelli}: infatti l'insieme
+\[\bigcap_{k \in \enne} \bigcup_{n \ge k} \set{x \in \Omega \left\mid \abs{f_{n_k}(x) - f(x)} \ge \frac1k \right. }\]
+ha misura nulla e sul complementare \(f_n\) converge puntualmente contro \(f\).
+\end{proof}

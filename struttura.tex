@@ -1,0 +1,53 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = TM.tex
+
+\documentclass[ structure = article
+              , maketitlestyle = standard
+              , liststyle = aligned
+              %, headerstyle = center
+              , secfont = roman
+              , secstyle = center
+              ]{suftesi}
+
+\usepackage[no-math]{fontspec}
+\usepackage[rm,mono=false]{libertine}
+\usepackage{polyglossia}
+\setmainlanguage{italian}
+\usepackage{microtype}
+\usepackage[hidelinks,breaklinks]{hyperref}
+\usepackage[italian=quotes]{csquotes}
+\newcommand\q\enquote
+
+\usepackage{imakeidx}
+\indexsetup{level=\section*}
+
+\usepackage{libertinust1math}
+\usepackage{MnSymbol,mathtools}
+\usepackage[bb=ams]{mathalfa}
+%\usepackage[bb=ams,cal=rsfs]{mathalfa}
+
+\usepackage{amsthm}
+\newcounter{coun}
+\counterwithin{coun}{section}
+\theoremstyle{definition}
+\newtheorem{definizione}[coun]{Definizione}
+\newtheorem{lemma}[coun]{Lemma}
+\newtheorem{proposizione}[coun]{Proposizione}
+\newtheorem{corollario}[coun]{Corollario}
+\newtheorem{osservazione}[coun]{Osservazione}
+\newtheorem{esempio}[coun]{Esempio}
+\newtheorem{esercizio}[coun]{Esercizio}
+
+%\usepackage{calc}
+
+\renewcommand\theequation{\thesection.\arabic{equation}}
+
+\newcommand\nil\varnothing
+\renewcommand\bar\overline
+\newcommand\set[1]{\left\{#1\right\}}
+\newcommand\abs[1]{\left\lvert#1\right\rvert}
+\newcommand\enne{\mathbb N}
+\newcommand\erre{\mathbb R}
+
+\newcommand\nota[1]{{\color{red}[#1]}}
