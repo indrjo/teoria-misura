@@ -1,0 +1,213 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../TM.tex
+
+\section{Integrazione secondo Lebesgue}
+
+Diciamo che una funzione \(f : \Omega \to \erre\) è {\em semplice}\index{funzione!semplice} nel caso in cui la sua immagine abbia cardinalità finita, cioè \(f \Omega = \set{c_1, \dots{}, c_n}\). In generale, le fibre di una funzione\footnote{Le fibre di una funzione \(f : X \to Y\) sono gli insiemi \(f^{-1}\set{y} := \set{x \in X \mid f(x) = y}\) per \(y \in Y\).} sono a due a due disgiunte e la loro unione è il dominio. Nel nostro caso, abbiamo un numero finito  di fibre \(E_1 := f^{-1}\set{c_1}\), \dots{}, e \(E_n := f^{-1}\set{c_n}\), le quali, osserviamo, costituiscono anche una partizione di \(\Omega\).
+
+Quindi le funzioni semplici sono funzioni \q{costanti a tratti}, cioè funzioni introdotte come segue
+\begin{equation}
+f(x) := \begin{cases}
+c_1 & \text{se } x \in E_1 \\
+\mathrel{\makebox[\widthof{\(c_i\)}]{\vdots{}}} & \mathrel{\makebox[\widthof{se \(x \in E_i\)}]{\vdots{}}} \\
+c_i & \text{se } x \in E_i \\
+\mathrel{\makebox[\widthof{\(c_i\)}]{\vdots{}}} & \mathrel{\makebox[\widthof{se \(x \in E_i\)}]{\vdots{}}} \\
+c_n & \text{se } x \in E_n
+\end{cases}\label{eqn:FunzioneCostanteATratti}
+\end{equation}
+Tuttavia, per funzioni con dominio \(\erre\), esiste un modo molto compatto e comodo di dire~\eqref{eqn:FunzioneCostanteATratti}. Per questo abbiamo bisogno di più notazione.
+
+Sia \(\Omega\) un qualsiasi insieme; ogni suo sottoinsieme \(A \subseteq \Omega\) ha una sua {\em funzione caratteristica}\footnote{In Teoria delle Probabilità, potreste aver sentito parlare di funzioni indicatrici.}\index{funzione!caratteristica}
+\[\chi_A : \Omega \to \erre \,,\ \chi_A(x) := \begin{cases} 1 & \text{se } x \in A \\ 0 & \text{altrimenti} \end{cases}.\]
+%\begin{align*}
+%& \chi_A : \Omega \to \erre \\
+%& \chi_A(x) := \begin{cases} 1 & \text{se } x \in A \\ 0 & \text{altrimenti} \end{cases}.
+%\end{align*}
+%
+È immediato verificare che \(f : \Omega \to \erre\) è semplice se e solo se si può scrivere come combinazione finita di funzioni caratteristiche:
+\[f(x) = \sum_{i=1}^n c_i\chi_{E_i}(x) \quad \text{per ogni } x \in \Omega\]
+dove \(E_1, \dots{}, E_n\) sono sottoinsiemi a due a due disgiunti di \(\Omega\) e tali che \(\bigcup_{i = 1}^n E_i = \Omega\).
+%\begin{align*}
+%f(x) &= \sum_{i=1}^n c_i\chi_{E_i}(x) \\
+%& \text{dove } E_i := f^{-1}\set{c_i}
+%\end{align*}
+In realtà, senza perdere generalità, possiamo anche scegliere \(E_i = f^{-1}\set{c_i}\) per pura comodità, dove le \(c_1, \dots{}, c_n\) sono le immagini di \(f\).
+
+Alcune ulteriori proprietà che vale la pena evidenziare sono le seguenti. Se \(\set{A_n \mid n \in I}\) è una partizione di \(A \subseteq \Omega\), allora
+\[\chi_A(x) = \sum_{i \in I} \chi_{A_i}(x) \quad \text{per ogni } x \in \Omega .\]
+Qui \(I\) può essere anche \(\enne\), senza alcun problema di convergenza di serie: infatti nella somma solo un addendo è \(1\), mentre tutti gli altri sono \(0\). Inoltre, se \(A, B \subseteq \Omega\) allora
+\[\chi_{A \cap B}(x) = \chi_A(x) \chi_B(x) \quad \text{per ogni } x \in \Omega .\]
+
+La proposizione che segue dice che si può approssimare una qualsiasi funzione \(f : \Omega \to \erre\) con una successione di funzioni semplici che gli converge contro puntualmente.
+
+\begin{lemma}\label{lemma:FunzioniRealiLimitiPuntualiDiFunzioniSemplici}
+Per ogni funzione \(f : \Omega \to \erre\) esiste una successione di funzioni semplici \(\set{s_n : \Omega \to \erre \mid n \in \enne}\) tali che \(s_n \to f\) puntualmente. Se \(f\) è pure misurabile (ciò presuppone che \(\Omega\) sia uno spazio misurabile), allora le \(s_n\) possono essere scelte misurabili. Se \(f \ge 0\), allora la successione può essere presa crescente.
+\end{lemma}
+
+\begin{proof}
+Ricordiamo che ogni funzione \(\Omega \to \erre\) è la differenza tra la sua parte positiva e quella negativa, dove queste due sono entrambe non negative. Pertanto, facciamo vedere come per ogni funzione \(f : \Omega \to \erre\) non negativa riusciamo a costruire una successione di funzioni semplici convergenti puntualmente a \(f\). Consideriamo, per \(n \in \enne\), gli insiemi
+\begin{align*}
+& E_{n,i} := f^{-1}\left[\frac{i}{2^n}, \frac{i+1}{2^n}\right) \quad \text{con } i \in \set{0, \dots{}, n2^n-1} \\
+& F_n := f^{-1}[n, +\infty) .
+\end{align*}
+Osserviamo che questi insiemi sono a due a due disgiunti e ricoprono \(\Omega\). La suddivisione di \(\erre_{\ge 0}\) ha un senso: fissato un certo \(n\), l'unione degli intervalli \(\left[\frac{i}{2^n}, \frac{i+1}{2^n}\right)\) è \([0, n)\), e questo intervallo è suddiviso in sotto-intervalli di lunghezza \(\frac{1}{2^n}\). Quindi non solo con questi intervalli si ricoprono porzioni sempre più grandi di \(\erre_{\ge 0}\), ma al interno di \([0, n)\) si pratica una suddivisone sempre più fine.\newline
+A questo punto, consideriamo le funzioni semplici
+\[s_n : \Omega \to \erre \,,\ s_n(x) := \sum_{i=0}^{n2^n-1} \frac{i}{2^n} \chi_{E_{n, i}}(x) + n \chi_{F_n}(x) .\]
+%\begin{align*}
+%& s_n : \Omega \to \erre \\
+%& s_n(x) := \sum_{i=0}^{n2^n-1} \frac{i}{2^n} \chi_{E_{n, i}}(x) + n \chi_{F_n}(x) .
+%\end{align*}
+Facciamo vedere la convergenza puntuale. Per costruzione, comunque preso \(x \in \Omega\), esiste \(n_x \in \enne\) per cui per ogni \(n \ge n_x\) si ha \(x\) sta in uno e un solo \(E_{n, i}\); allora, per \(n \ge n_x\), 
+\[\abs{f(x) - s_n(x)} = \underbrace{\abs{f(x) - \frac{i}{2^n}}}_{i \text{ è quello per cui } x \in E_{n, i}} < \abs{\frac{i+1}{2^n} -\frac{i}{2^n}} = \frac{1}{2^n} .\]
+Possiamo quindi concludere
+\[\lim_{n \to +\infty} s_n(x) = f(x) \quad \text{per ogni } x \in \Omega .\]
+Il resto della proposizione è semplice da dimostrare. Se \(f\) è misurabile, allora gli \(E_{n, i}\) e gli \(F_n\) sono insiemi misurabili, e quindi le \(s_n\) sono misurabili a causa della Proposizione~\ref{proposizione:ChiusuraFunzioniMisurabili}. Se \(f \ge 0\), allora è anche \(s_n \le s_{n+1}\) per ogni \(n \in \enne\), vedi la costruzione che abbiamo fatto.
+\end{proof}
+
+Ora per parlare di integrazione, entrano nel discorso le misure.
+
+\begin{definizione}[Integrale secondo Lebesgue]
+Sia \((\Omega, \mathcal A, \mu)\) uno spazio di misura e \(s : \Omega \to \erre\) una semplice funzione misurabile, cioè
+\[s(x) = \sum_{i=1}^n c_i \chi_{E_i}(x)\]
+per opportuni \(E_1\), \dots{} e \(E_n\) misurabili che partizionano \(\Omega\). Chiamiamo {\em integrale} di \(s\) il numero (eventualmente infinito)
+\[\int s \mathrm d \mu := \sum_{i=1}^n c_i \mu(E_i) .\]
+%
+Sia ora \(f : \Omega \to \erre\) una funzione misurabile non negativa. L'{\em integrale} di \(f\) è il numero reale
+\[\int f \mathrm d \mu := \sup_{\substack{ s : \Omega \to \erre \text{ semplice,} \\ \text{misurabile e } 0 \le s \le f}} \int_\Omega s \mathrm d \mu .\]
+Qualora sia un numero reale eventualmente infinito, l'{\em integrale secondo Lebesgue}\index{integrale di Lebesgue} di una funzione misurabile qualsiasi \(f : \Omega \to \erre\) è
+\[\int f \mathrm d \mu := \int f_+ \mathrm d \mu - \int f_- \mathrm d \mu .\]
+Molto spesso però, si vuole integrare solo sua una parte del dominio: se \(E \in \mathcal A\), allora
+\[\int_E f \mathrm d \mu := \int \left(\chi_E f\right) \mathrm d \mu .\]
+Una funzione misurabile \(f : \Omega \to \erre\) si dice {\em integrabile} su \(E \subseteq \Omega\) misurabile se e solo se sono finiti \(\int_E f_+ \mathrm d \mu\) e \(\int_E f_- \mathrm d \mu\).
+\end{definizione}
+
+Un criterio molto semplice per verificare l'integrabilità di una funzione misurabile è il seguente.
+
+\begin{proposizione}\label{proposizione:SempliceCriterioIntegrabilità}
+Sia \((\Omega, \mathcal A, \mu)\) uno spazio di misura, \(f : \Omega \to \erre\) misurabile e \(E \in \mathcal A\). Se esiste una funzione misurabile \(g : \Omega \to \erre\) che sia integrabile su \(E\) e che \(\abs f \le g\) su \(E\), allora \(f\) è integrabile su \(E\).
+\end{proposizione}
+
+\begin{proof}
+Infatti dalle ipotesi segue che \(0 \le f_+, f_- \le g\) e quindi \(\int_E f_+ \mathrm d \mu\) e \(\int_E f_- \mathrm d \mu\) sono compresi tra \(0\) e \(\int_E g \mathrm d \mu\), che è finito.
+%\[0 \le \int_E f_+ \mathrm d \mu, \int_E f_- \mathrm d \mu \le \int_E g \mathrm d \mu < +\infty .\qedhere\]
+\end{proof}
+
+\begin{esempio}
+Consideriamo lo spazio di misura \([1, +\infty)\) con la struttura di \(\sigma\)-algebra ereditata da \((\erre, \mathcal L, \lambda)\), dove \(\mathcal L\) è la \(\sigma\)-algebra di Lebesgue e \(\lambda : \mathcal L \to [0, +\infty]\) è la misura unidimensionale di Lebesgue ristretti a \(\erre_{> 0}\). Consideriamo la funzione
+\(f : [1, +\infty) \to \erre \,,\ f(x) := \frac1{x^\alpha}\)
+con \(\alpha \in \erre\). Vediamo se è integrabile su \([1, +\infty)\) e la funzione gradino
+\[\bar f : [1, +\infty) \to \erre\,,\ \bar f(x) := \frac{1}{n^\alpha} \ \text{dove } n \le x < n+1 .\]
+L'integrale di Lebesgue in questo caso è molto semplice da calcolare:
+\[\int_{[1, +\infty)} \bar f \mathrm d \lambda = \sum_{n = 1}^{+\infty} \frac{1}{n^\alpha} .\]
+Se \(\alpha > 1\), allora la serie converge e l'integrale è finito; inoltre \(\abs{f(x)}\le \bar f(x)\) per ogni \(x \in [1, +\infty)\). In questo caso, \(f\) è integrabile su \([1, +\infty)\).
+%\newline
+%Se invece \(\alpha \le 0\), allora le serie diverge, e quindi l'integrale è infinito; inoltre \(\abs{f(x)} \ge g(x)\) per ogni \(x \in [1, +\infty)\). Pertanto, \(f\) non è integrabile su \([1, +\infty)\).
+\end{esempio}
+
+\begin{esercizio}
+Considera il precedente esempio: e se \(\alpha \in (0, 1]\)? Costruisci una opportuna funzione gradino \(\underline f : [1, +\infty) \to \erre\) tale che \(\underline f \le f\) e il cui integrale su \([1, +\infty)\) è infinito.
+\end{esercizio}
+
+\begin{esempio}
+L'integrale di Riemann e quello di Lebesgue non sono la stessa cosa. Considera la funzione
+\[f : \erre \to \erre\,,\ f(x) := \sum_{n=1}^\infty (-1)^n \frac1n \chi_{[n, n+1)}(x) .\]
+Secondo Riemann, l'integrale è il numero reale
+\[\sum_{n=1}^\infty (-1)^n \frac 1n\]
+(la serie è convergente). Secondo Lebesgue invece no: bisogna considerare le parti positiva e negativa e integrarle separatamente
+\begin{align*}
+& \int_\erre f_+ \mathrm d \lambda = \sum_{\substack{n = 1 \\ n \text{ pari}}} \frac 1n  = +\infty\\
+& \int_\erre f_- \mathrm d \lambda = \sum_{\substack{n = 1 \\ n \text{ dispari}}} \frac 1n = +\infty
+\end{align*}
+\end{esempio}
+
+\begin{proposizione}\label{proposizione:MisuraIntegrale}
+Sia \((\Omega, \mathcal A, \mu)\) uno spazio di misura e \(f : \Omega \to \erre\) misurabile e non negativa. Allora la funzione
+\begin{align*}
+& \nu : \mathcal A \to [0, +\infty] \\
+& \nu(E) := \int_E f \mathrm d \mu
+\end{align*}
+è una misura per lo spazio misurabile \((\Omega, \mathcal A)\).
+\end{proposizione}
+
+Per dimostrare questa proposizione, dimostriamo prima che vale per le funzioni semplici.
+
+\begin{lemma}
+Sia \((\Omega, \mathcal A, \mu)\) uno spazio di misura e \(f : \Omega \to \erre\) una funzione semplice, misurabile e non negativa. Allora
+\begin{align*}
+& \nu : \mathcal A \to [0, +\infty] \\
+& \nu(E) := \int_E f \mathrm d \mu
+\end{align*}
+è una misura per lo spazio misurabile \((\Omega, \mathcal A)\).
+\end{lemma}
+
+\begin{proof}
+È banale verificare che \(\nu(\nil) = 0\). Sia ora \(\set{A_n \mid n \in \enne}\) una successione di elementi di \(\mathcal A\) a due a due disgiunti. Per comodità, \(A := \bigcup_{n \in \enne} A_n\). Inoltre, \(f : \Omega \to \erre\) è semplice, perciò scriviamo
+\[f = \sum_{i=1}^k c_i \chi_{E_i}\]
+con gli \(E_i\) che partizionano \(\Omega\) e \(c_1, \dots{}, c_n \in \erre\). Abbiamo allora
+\[\sum_{n \in \enne} \int_{A_n} f \mathrm d \mu = \sum_{n \in \enne} \sum_{i = 1}^k c_i \mu \left(E_i \cap A_n \right) = \sum_{i = 1}^k c_i  \sum_{n \in \enne} \mu \left(E_i \cap A_n \right) .\]
+Qui, le successioni \(\set{E_i \cap A_n \mid n \in \enne}\) sono di elementi a due a due disgiunti, quindi
+\[\sum_{n \in \enne} \int_{A_n} f \mathrm d \mu = \sum_{i = i}^k c_i \mu(E_i \cap A) = \int_{A} f \mathrm d \mu . \qedhere\]
+%Osserviamo inoltre che (è facile da dimostrare)
+%\[\int \chi_E f \mathrm d \mu = \left(\int f \mathrm d \mu\right) \chi_E\]
+%con \(E \in \mathcal A\) qualsiasi. Abbiamo quindi che
+%\[\int_A f \mathrm d \mu = \int \chi_A f \mathrm d \mu = \underbrace{\left(\int f \mathrm d \mu\right) \chi_A = \sum_{n \in \enne} \left(\int f \mathrm d \mu\right) \chi_{A_n}}_{\text{le funzioni caratteristiche sono misure}} = \sum_{n \in \enne} \int_{A_n} f \mathrm d\mu. \qedhere\]
+\end{proof}
+
+\begin{proof}[Dimostrazione della Proposizione~\ref{proposizione:MisuraIntegrale}]
+È immediato vedere che \(\nu(\nil) = 0\). Sia ora una \(\set{A_n \mid n \in \enne}\) una successione di elementi \(\mathcal A\) a due a due disgiunti, e per comodità \(A := \bigcup_{n \in \enne} A_n\). Facciamo vedere che \(\nu (A) = \sum_{n \in \enne} \nu(A_n)\), vale a dire 
+\[\int_A f \mathrm d \mu = \sum_{n \in \enne} \int_{A_n} f \mathrm d \mu .\]
+Per ogni funzione semplice, misurabile e tale che \(0 \le s \le f\) si ha
+\[\sum_{n \in \enne} \int_{A_n} f \mathrm d \mu \ge \underbrace{\sum_{n \in \enne} \int_{A_n} s \mathrm d \mu = \int_A s \mathrm d \mu}_{\text{vedi lemma precedente}}\]
+e quindi, per definizione di integrale, \(\sum_{n \in \enne} \nu(A_n) \ge \nu(A)\).\newline
+%\[\sum_{n \in \enne} \int_{A_n} f \mathrm d \mu \ge \int_A f \mathrm d \mu .\]
+Rimane solo da provare la disuguaglianza opposta. Osserviamo preliminarmente che se qualche \(\nu(A_n)\) è infinito, allora, questa disuguaglianza è verificata. Ragione per cui d'ora in poi si suppone che tutti gli \(\nu(A_n)\) siano finiti. Fissato \(\varepsilon > 0\), per qualsiasi \(n \in \enne\) si ha che esiste una funzione \(s_n : \Omega \to \erre\) semplice, misurabile e tale che \(0 \le s_n \le f\) per cui
+\[\int_{A_n} f \mathrm d \mu - \frac \varepsilon n \le \int_{A_n} s_n \mathrm d \mu .\]
+Se ne deduce che
+\[\sum_{n=0}^k \int_{A_n} f \mathrm d \mu - \varepsilon \le \underbrace{\sum_{n=0} \int_{A_n} s_n \mathrm d \mu = \int_{\bigcup_{n=1}^k A_n} \left( \sum_{n=1}^k \chi_{A_n} s_n \right) \mathrm d \mu}_{\text{esercizio}} \le \int_{\bigcup_{n=1}^k A_n} f \mathrm d \mu .\]
+E quindi per l'arbitrarietà di \(\varepsilon > 0\) si ha
+\[\sum_{n=0}^k \int_{A_n} f \mathrm d \mu \le \int_{\bigcup_{n=1}^k A_n} f \mathrm d \mu .\]
+Pertanto per ogni \(k \in \enne\) si ha
+\[\sum_{n=0}^k \nu(A_n) \le \nu\left(\bigcup_{n=1}^k A_n\right) \le \nu(A) \]
+e, a maggior ragione, \(\sum_{n \in \enne} \nu(A_n) \le \nu(A)\). Dove è stata usata la non negatività di \(f\)? \(\sum_{n \in \enne} \nu(A_n)\) è una serie che converge oppure diverge a \(+\infty\) dato che i singoli \(\nu(A_n) \ge 0\) proprio perché \(f \ge 0\).
+\end{proof}
+
+\begin{esempio}
+Consideriamo la funzione misurabile
+\[g : (0, 1] \to \erre\,,\ g(x) := \frac{1}{x^\alpha}\]
+e vediamo se è integrabile rispetto alla misura di Lebesgue. Osserviamo che 
+\[(0, 1] = \bigcup_{n \in \enne} \left(\frac{1}{2^{n+1}}, \frac{1}{2^n}\right] .\] Ora, per la Proposizione~\ref{proposizione:MisuraIntegrale} si ha
+\[\int_{(0, 1]} g \mathrm d \lambda = \sum_{n \in \enne} \int_{\left(\frac{1}{2^{n+1}}, \frac{1}{2^n}\right]} g \mathrm d \lambda .\]
+Su ciascuno degli intervalli \(\left(\frac{1}{2^{n+1}}, \frac{1}{2^n}\right]\), la funzione \(g\) è maggiorata dalla funzione costante a \(2^{\alpha(n+1)}\). E quindi abbiamo
+\[\int_{(0, 1]} g \mathrm d \mu \le \sum_{n \in \enne} \left(2^\alpha \right)^{n+1} \lambda \left(\frac{1}{2^{n+1}}, \frac{1}{2^n}\right] = \sum_{n \in \enne} \left( 2^{\alpha-1} \right)^{n+1} .\]
+Se \(\alpha < 1\), allora l'integrale è finito, quindi la funzione \(g\) è integrabile.\newline
+Equivalentemente, si sarebbe potuto procedere considerando la funzione gradino che sta sopra \(g\):
+\[\bar g : (0, 1] \to \erre\,,\ \bar g(x) := \sum_{n \in \enne} \frac{1}{2^{n+1}}\chi_{\left(\frac{1}{2^{n+1}}, \frac{1}{2^n}\right]} (x) .\]
+%Per la Proposizione~\ref{proposizione:MisuraIntegrale} e il Lemma~\ref{lemma:LimitOfMeasures}, abbiamo
+%\[\int_{(0, 1]} g \mathrm d \lambda = \lim_{n \to \infty} \int_{\left[\frac1n, 1\right]} g \mathrm d \lambda .\]
+%Il problema è quindi ricondotto a capire cosa possono essere gli integrali a destra. 
+\end{esempio}
+
+\begin{corollario}
+Sia \((\Omega, \mathcal A, \mu)\) uno spazio di misura e \(f : \Omega \to \erre\) una funzione misurabile e integrabile. Allora per ogni successione \(\set{A_n \mid n \in \enne}\) di elementi di \(\mathcal A\) a due a due disgiunti si ha
+\[\int_{\bigcup_{n \in \enne} A_n} f \mathrm d \mu = \sum_{n \in \enne} \int_{A_n} f \mathrm d \mu .\]
+\end{corollario}
+
+\begin{proposizione}
+Sia \((\Omega, \mathcal A, \mu)\) uno spazio di misura e \(f : \Omega \to \erre\) una funzione misurabile e integrabile. Allora \(\abs f\) è integrabile su e
+\[\abs{\int_\Omega f \mathrm d \mu} \le \int_\Omega \abs f \mathrm d \mu .\]
+\end{proposizione}
+
+Uno potrebbe pensare di procedere così. Si ricorda che \(\abs f = f_+ + f_-\), e poi di fare
+\[\int_\Omega f \mathrm d \mu = \int_\Omega f_+ \mathrm d \mu + \int_\Omega f_- \mathrm d \mu .\]
+Il punto è questo fatto verrà provato solo dopo aver provato qualche risultato sulla convergenza. Si potrebbe dimostrare questo teorema una volta arrivati là, ma si può fare anche già adesso.
+
+\begin{proof}
+\(\Omega\) è partizionato in due insiemi misurabili:
+\[E_1 := \set{x \in \Omega \mid f(x) \ge 0}\,,\ E_2 := \set{x \in \Omega \mid f(x) < 0} .\]
+Abbiamo visto \nota{davvero?} poi che, se \(f\) è misurabile, pure \(\abs f\) lo è. In questo caso,
+\[\int_\Omega \abs f \mathrm d \mu = \int_{E_1} \abs f \mathrm d \mu + \int_{E_2} \abs f \mathrm d \mu = \int_{E_1} f \mathrm d \mu + \int_{E_2} (-f) \mathrm d \mu\]
+e quindi \(\abs f\) è integrabile. Rimangono dei conti da fare:
+\[\int_\Omega \abs f \mathrm d \mu = \underbrace{\int_\Omega \abs f \mathrm d \mu}_{\int_\Omega f_+ \mathrm d \mu} + \underbrace{\int_\Omega \abs f \mathrm d \mu}_{\int_\Omega f_- \mathrm d \mu} \ge \abs{\int_\Omega f_+ \mathrm d \mu - \int_\Omega f_- \mathrm d \mu} = \abs{\int_\Omega f \mathrm d \mu} .\qedhere\]
+\end{proof}
+

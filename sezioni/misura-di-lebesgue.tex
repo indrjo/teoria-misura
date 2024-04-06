@@ -1,0 +1,95 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../TM.tex
+
+\section{Misura di Lebesgue}
+
+In questa sezione, descriveremo uno spazio di misura molto importante. Come c'è da aspettarsi dalla definizione, costruiremo prima uno spazio misurabile e poi ci inventeremo una misura su questo spazio.
+
+Con {\em intervallo} di \(\erre\) intendiamo un insieme limitato della forma \((a, b)\), \([a, b)\), \((a, b]\) oppure \([a, b]\). Un {\em intervallo} di \(\erre^n\) è il prodotto cartesiano di \(n\) intervalli di \(\erre\). La {\em misura di Lebesgue} di un intervallo \(I \subseteq R\) di estremi \(a\) e \(b\) è il numero reale \(\abs{a-b}\); la {\em misura di Lebesgue} di un intervallo \(I = \prod_{j=1}^n I_j\) di \(\erre^n\) è il prodotto delle misure degli \(I_j\). Indichiamo in ogni caso con \(\abs{I}\) la misura di Lebesgue di un intervallo \(I\).
+
+\begin{definizione}[Misura di Lebesgue]
+Chiamiamo {\em ricoprimento}\footnote{In Topologia, il ricoprimento è fatto di aperti. In questa sede non ci interessa questo.} di un \(A \subseteq \erre^n\) una qualsiasi successione di intervalli \(\set{I_n \mid n \in \enne}\) tale che \(A \subseteq \bigcup_{n \in \enne} I_n\). La {\em misura di Lebesgue} di un insieme \(A \subseteq \erre^n\) è il numero (eventualmente infinito)
+\[\lambda (A) := \inf \set{\left. \sum_{n \in \enne} \abs{I_n} \right\mid  \set{I_n \mid n \in \enne} \text{ ricoprimento di } A} .\]
+\end{definizione}
+
+Abbiamo usato il termine \q{misura}, ma darne effettivamente una giustificazione non è banale. Anzi tutto bisogna affiancare a \(\erre^n\) una \(\sigma\)-algebra e per poi sperare di arrivare ad una misura come quella in definizione. Per ora, quello che abbiamo è solo una funzione
+\[\lambda : 2^{\erre^n} \to [0, +\infty] .\]
+
+\begin{lemma}
+Valgono le seguenti proprietà:
+\begin{enumerate}
+\item \(\lambda(\nil) = 0\).
+\item Se \(A, B \subseteq \erre^n\) sono tali che \(A \subseteq B\), allora \(\lambda(A) \le \lambda(B)\).
+\item \(\displaystyle\lambda\left(\bigcup_{n \in \enne} A_n\right) \le \sum_{n \in \enne} \lambda(A_n)\) per ogni successione di sottoinsiemi di \(\erre^n\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+I primi due punti sono immediati, ci limitiamo a dimostrare l'ultimo. Chiamiamo \(A\) l'insieme \(\bigcup_{n \in \enne} A_n\). Da definizione di \(\lambda\), comunque preso \(\varepsilon >0\), per qualsiasi \(n \in \enne\) esiste una successione di intervalli \(\set{I_{n, j} \mid j \in \enne}\) tale che
+\[A_n \subseteq \bigcup_{j \in \enne} I_{n, j} \quad \text{e} \quad \sum_{j \in \enne} \abs {I_{n, j}} \le \lambda(A_n) + \frac{\varepsilon}{2^n}.\]
+Evidentemente \(A \subseteq \bigcup_{i, j \in \enne} I_{i, j}\); pertanto, per definizione di \(\lambda\),
+\[\lambda(A) \le \sum_{n \in \enne} \sum_{j \in \enne} \abs{I_{n,j}} \le \sum_{n \in \enne} \lambda(A_n) + \varepsilon\]
+che per l'arbitrarietà di \(\varepsilon\) implica quello che vogliamo.
+\end{proof}
+
+\begin{proposizione}
+\(\lambda(I) = \abs I\) per ogni intervallo di \(\erre^n\).
+\end{proposizione}
+
+\begin{proof}
+Essendo evidentemente \(\lambda(I) \le \abs I\), proviamo la disuguaglianza opposta. Osserviamo in tal caso che, se proviamo che \(\abs I \le \sum_{n \in \enne} \abs{I_n}\) per ogni ricoprimento \(\set{I_n \mid n \in \enne}\) di \(I\), allora necessariamente \(\abs I \le \lambda(I)\). \newline
+Fissiamo \(\varepsilon>0\). Si può trovare in tal caso \(J \subseteq I\) intervallo chiuso con \(\abs J \ge \abs I -\frac \varepsilon 2\), e per ogni \(n \in \enne\) un intervallo aperto \(A_n\) che contiene \(I_n\) e tale che \(\abs{A_n} < \abs{I_n} + \frac \varepsilon {2^{n+1}}\). Ora, gli \(A_n\) formano un ricoprimento di aperti del compatto \(J\), e quindi esiste \(F \subseteq \enne\) finito tale che \(\set{A_n \mid n \in F}\) ricopre \(J\). Quindi
+\[\abs I - \frac \varepsilon 2 \le \abs J \le \sum_{n \in F} \abs{A_n} \le \sum_{n \in F} \abs{I_n} + \frac \varepsilon 2 \le \sum_{n \in \enne} \abs{I_n} + \frac \varepsilon 2\]
+cioè
+\[\abs I \le \sum_{n \in \enne} \abs{I_n} + \varepsilon .\]
+Per l'arbitrarietà di \(\varepsilon\), abbiamo concluso.
+\end{proof}
+
+\begin{lemma}
+Siano \(F_1, \dots{}, F_n \subseteq \erre^n\) chiusi, limitati e a due a due disgiunti. Allora
+\[\lambda \left(\bigcup_{i=1}^n F_i\right) = \sum_{i=1}^n \lambda (F_i) .\]
+\end{lemma}
+
+\begin{proof}
+\nota{Ancora da \TeX{}are\dots{}}
+\end{proof}
+
+\begin{proposizione}
+Sia \(A \subseteq \erre^n\) un aperto limitato. Allora per ogni \(\varepsilon >0\) esiste \(C \subseteq A\) chiuso tale che \(\lambda(A)-\varepsilon < \lambda(C)\).
+\end{proposizione}
+
+\begin{proof}
+\nota{Ancora da \TeX{}are\dots{}}
+\end{proof}
+
+\begin{proposizione}
+Sia \(A \subseteq \erre^n\) un aperto limitato e \(C \subseteq A\) chiuso. Allora
+\[\lambda(A-C) = \lambda(A) - \lambda(C) .\]
+\end{proposizione}
+
+\begin{proof}
+\nota{Ancora da \TeX{}are\dots{}}
+\end{proof}
+
+\begin{definizione}[Misurabilità secondo Lebesgue]
+Un insieme \(A \subseteq \erre^n\) si dice {\em misurabile secondo Lebesgue} qualora per ogni \(\varepsilon>0\) esistono un chiuso \(F \subseteq \erre^n\) ed un aperto \(G \subseteq \erre^n\) tali che \(F \subseteq A \subseteq G\) e \(\lambda(G-F) < \varepsilon\). Indichiamo con \(\mathcal L_n\) la famiglia dei sottoinsiemi di \(\erre^n\) misurabili secondo Lebesgue.
+\end{definizione}
+
+\begin{proposizione}
+\(\mathcal L_n\) è una \(\sigma\)-algebra.
+\end{proposizione}
+
+\begin{proof}
+\nota{Ancora da \TeX{}are\dots{}}
+\end{proof}
+
+\begin{proposizione}
+La restrizione di \(\lambda\) a \(\mathcal L_n\) è una misura sullo spazio misurabile \((\erre^n, \mathcal L_n)\).
+\end{proposizione}
+
+\begin{proof}
+\nota{Ancora da \TeX{}are\dots{}}
+\end{proof}
+
+\nota{Sezione ancora da concludere\dots{}}

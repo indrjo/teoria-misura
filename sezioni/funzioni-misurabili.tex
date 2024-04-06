@@ -1,0 +1,67 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../TM.tex
+
+\section{Funzioni misurabili}
+
+\begin{definizione}[Funzione misurabili]
+Siano \((\Omega_1, \mathcal A_1)\) e \((\Omega_2, \mathcal A_2)\) due spazi misurabili. Una {\em funzione misurabile}\index{funzione!misurabile} da \((\Omega_1, \mathcal A_1)\) a \((\Omega_2, \mathcal A_2)\) è una qualsiasi funzione \(f : \Omega_1 \to \Omega_2\) tale che per ogni \(E \in \mathcal A_2\) si ha \(f^{-1} E \in \mathcal A_1\). Per dire che \(f\) è una funzione misurabile da \((\Omega_1, \mathcal A_1)\) a \((\Omega_2, \mathcal A_2)\) scriveremo
+\[f : (\Omega_1, \mathcal A_1) \to (\Omega_2, \mathcal A_2)\]
+oppure semplicemente \(f : \Omega_1 \to \Omega_2\) quando è chiaro dal contesto quali sono le rispettive \(\sigma\)-algebre.
+\end{definizione}
+
+La verifica della misurabilità di una funzione può semplificarsi \q{drasticamente} nella caso in cui la \(\sigma\)-algebra del codominio sia generata:
+
+\begin{lemma}
+Siano due spazi misurabili \((\Omega_1, \mathcal A_1)\) e \(\Omega_2, \mathcal A_2\) con \(\mathcal A_2\) una \(\sigma\)-algebra generata da una famiglia \(S\). Allora sono equivalenti:
+\begin{enumerate}
+\item \(f : (\Omega_1, \mathcal A_1) \to (\Omega_2, \mathcal A_2)\) è misurabile
+\item per ogni \(E \in S\) si ha \(f^{-1} E \in \mathcal A_1\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+L'implicazione \((1) \Rightarrow (2)\) è ovvia, proviamo l'altro verso. L'insieme
+\[\mathcal U := \set{E \in \mathcal A_2 \mid f^{-1}E \in \mathcal A_1}\]
+contiene \(S\) ed è una \(\sigma\)-algebra per \(\mathcal A_2\): per la definizione di \(\sigma\)-algebra generata, abbiamo quindi che \(\mathcal A_2 \subseteq \mathcal U\), e l'asserto può considerarsi provato.
+\end{proof}
+
+Noi in particolare ci interesseremo di una classe di funzioni misurabili. Prima di tutto, chiamiamo {\em algebra di Borel}\index{algebra di Borel} la più piccola \(\sigma\)-algebra contente gli aperti della topologia euclidea di \(\erre\). Indichiamo questa \(\sigma\)-algebra con \(\mathbb B\). Il lemma che segue dice che per l'algebra di borel si possono scegliere altre base che possono fare comodo in certe situazioni.
+
+\begin{lemma}\label{lemma:AltreBasiPerAlgebraDiBorel}
+Altre basi dell'algebra di Borel sono:
+\begin{itemize}
+\item la famiglia degli intervalli aperti e limitati
+\item la famiglia degli intervalli chiusi e limitati
+\item la famiglia degli intervalli della forma \([a, b)\) (oppure \((a, b]\)), per \(a, b \in \erre\)
+\item la famiglia degli intervalli del tipo \((-\infty, a)\) (oppure \((a, +\infty)\)), per \(a \in \erre\)
+\item la famiglia degli intervalli del tipo \((-\infty, a]\) (oppure \([a, +\infty)\)), per \(a \in \erre\)
+\end{itemize}  
+\end{lemma}
+
+\begin{proof}
+Essenzialmente, basta ricordarsi cosa significa \q{\(\sigma\)-algebra generata} e qualche fatto topologico. La topologia euclidea ha una base numerabile fatta di intervalli aperti e limitati, quindi il primo punto è provato. Dimostriamo alcuni degli punti, i restanti vengono lasciati per esercizio.\newline
+Facciamo vedere che la sigma algebra generata dagli intervalli \((-\infty, a)\), con \(a \in \erre\), è quella di Borel. Una inclusione è banale, per far vedere l'altra osserviamo che
+\[(a, b) = (-\infty, b) - \bigcap_{n \in \enne} \left(-\infty, a+\frac1n\right) .\]
+Per definizione di \(\sigma\)-algebra, gli intervalli \((a, b)\) appartengono alla \(\sigma\)-algebra generata dagli intervalli \((-\infty, c)\).
+\end{proof}
+
+D'ora in poi quando si parla di \(\erre\), si suppone che questa abbia con sé l'algebra di Borel.
+
+\begin{proposizione}\label{proposizione:ChiusuraFunzioniMisurabili}
+Sia \((\Omega, \mathcal A)\) uno spazio misurabile e \(f : \Omega \to \erre\) una funzione misurabile. Sono misurabili le funzioni
+%
+\begin{align*}
+& f_+ : \Omega \to \erre\,, \ f_+(x) := \begin{cases} f(x) & \text{se } f(x) \ge 0 \\ 0 & \text{altrimenti} \end{cases} \\
+& f_- : \Omega \to \erre\,, \ f_-(x) := \begin{cases} -f(x) & \text{se } f(x) \le 0 \\ 0 & \text{altrimenti} \end{cases}
+\end{align*}
+%
+Lo sono anche \(k f\), con \(k \in \erre\), e \(\abs f\). Inoltre se \(g : \Omega \to \erre\) è una altra funzione misurabile, allora lo sono anche \(f+g\), \(fg\), \(\max \set{f, g}\) e \(\min \set{f, g}\).
+\end{proposizione}
+
+\begin{proof}
+Useremo il Lemma \ref{lemma:AltreBasiPerAlgebraDiBorel}. \nota{Ancora da terminare\dots{}}
+\end{proof}
+
+\nota{C'è qualche altra proposizione riguardante le funzioni misurabili. Ancora da \TeX{}are\dots{}}
+

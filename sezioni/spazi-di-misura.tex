@@ -1,0 +1,102 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../TM.tex
+
+\section{Spazi di misura}
+
+\begin{definizione}[Spazi misurabili]\label{definizione:SpaziMisurabili}
+Una \(\sigma\)-{\em algebra} \index{\(\sigma\)-algebra} su un insieme \(\Omega\) è una qualsiasi famiglia \(\mathcal A \subseteq 2^\Omega\) tale che:
+\begin{enumerate}
+\item \(\nil \in \mathcal A\)
+\item per ogni \(A \in \mathcal A\) si ha \(\Omega - A \in \mathcal A\)
+\item per ogni successione \(\set{A_n \mid n \in \enne}\) di elementi di \(\mathcal A\) si ha \(\bigcup_{n \in \enne} A_n \in \mathcal A\).
+\end{enumerate}
+I sottoinsiemi di \(\Omega\) che appartengono a \(\mathcal A\) sono chiamati {\em misurabili}\index{insieme!misurabile}. Uno {\em spazio misurabile} \index{spazio!misurabile} consiste di un insieme \(\Omega\) e una sua \(\sigma\)-algebra \(\mathcal A\). Di solito ci riferiremo a questo nuovo oggetto attraverso la coppia \((\Omega, \mathcal A)\).
+\end{definizione}
+
+\begin{osservazione}
+La terza condizione della definizione sembra essere non dire nulla sulle unioni finite di insiemi, ma non è così. Basta scegliere una successione in cui tutti tranne un numero finito di termini sono nulli.
+\end{osservazione}
+
+\begin{proposizione}
+Sia \(\Omega\) un insieme e \(F \subseteq 2^\Omega\) qualsiasi. Allora esiste una e una sola \(\sigma\)-algebra \(\mathcal A\) su \(\Omega\) tale che 
+\begin{enumerate}
+\item \(F \subseteq \mathcal A\)
+\item per ogni \(\sigma\)-algebra \(\mathcal B\) su \(\Omega\) tale che \(F \subseteq \mathcal B\) si ha \(\mathcal A \subseteq \mathcal B\). 
+\end{enumerate}
+\end{proposizione}
+
+\begin{proof}
+Almeno una \(\sigma\)-algebra contenente \(F\) esiste ed è \(2^\Omega\). Inoltre si mostra facilmente che l'intersezione di \(\sigma\)-algebre è ancora una \(\sigma\)-algebra, quindi indichiamo con \(\mathcal A\) l'intersezione di tutte le \(\sigma\)-algebre di \(\Omega\) che contengono \(F\). Si può verificare facilmente che questa è la \(\sigma\)-algebra cercata.
+\end{proof}
+
+\begin{definizione}[\(\sigma\)-algebra generata]
+La \(\sigma\)-algebra \(\mathcal A\) della proposizione precedente viene detta \(\sigma\)-{\em algebra generata}\index{\(\sigma\)-algebra!generata} da \(F\).
+\end{definizione}
+
+\begin{definizione}[Spazi di misura]
+Una {\em misura}\index{misura} su uno spazio misurabile \((\Omega, \mathcal A)\) è una funzione
+\[\mu : \mathcal A \to [0, +\infty]\]
+tale che:
+\begin{enumerate}
+\item \(\mu (\nil) = 0\)
+\item per ogni successione \(\set{A_n \mid n \in \enne}\) di elementi di \(\mathcal A\) a due a due disgiunti
+\[\mu \left( \bigcup_{n \in \enne} A_n \right) = \sum_{n \in \enne} \mu \left( A_n \right).\]
+\end{enumerate}
+Uno {\em spazio di misura}\index{spazio!di misura} è il dato di uno spazio misurabile \((\Omega, \mathcal A)\) e di una misura \(\mu : \mathcal A \to [0, +\infty]\) su questo. Come prima, raccogliamo questi tre dati in una tripla \((\Omega, \mathcal S, \mu)\).
+\end{definizione}
+
+\nota{Fare osservazione sulla convergenza della serie in definizione. Parlare anche delle unioni finite.}
+
+\begin{esempio}
+Un esempio particolarmente importante per la Teoria della Probabilità e per la Statistica è il seguente. Sia \(\Omega\) un insieme che in genere viene chiamato {\em insieme degli eventi elementari}; supponiamo per di più che abbia cardinalità finita \(n\) e scriviamo \(x_1\), \dots{} e \(x_n\) i suoi elementi. Una volta scelti \(n\) numeri reali \(p_1, \dots{}, p_n \ge 0\) tali che \(\sum_{i=1}^n p_i = 1\), sullo spazio misurabile discreto \((\Omega, 2^\Omega)\) esiste una e una sola misura
+\[\pi : 2^\Omega \to [0, +\infty]\]
+tale che \(\pi\left(\set{x_i}\right) = p_i\) per ogni \(i \in \set{1, \dots{}, n}\). A seconda che si è nella Teoria della Probabilità o nella Statistica, i numeri \(p_1\), \dots{} e \(p_n\) possono essere visti come probabilità di un evento elementare oppure come la frequenza di un evento. Essendo poi che \(\pi\) assume valori in \([0, 1]\), si sceglie solitamente questo come codominio della misura.
+\end{esempio}
+
+\begin{esempio}
+Un altro esempio importante è questo. Preso uno spazio misurabile \((\Omega, \mathcal A)\), la {\em misura di Dirac} concentrata in \(x_0 \in \Omega\) è la funzione
+\[\delta_{x_0} : \mathcal A \to [0, +\infty]\,, \ \delta_{x_0}(E) := \begin{cases} 1 & \text{se } x_0 \in E \\ 0 & \text{altrimenti} \end{cases}.\]
+Vedremo l'importanza delle delta di Dirac quando parleremo di integrazione.
+\end{esempio}
+
+\begin{esempio}
+Banalmente, il conteggio degli elementi può fornire una misura. Per \((\Omega, \mathcal A)\) uno spazio misurabile, definiamo la misura
+\[\# : \mathcal A \to [0, +\infty]\,, \ \#(E) := \begin{cases} \text{numero di elementi di } E & \text{se \(E\) è finito} \\ +\infty & \text{altrimenti} \end{cases} .\]
+Tuttavia, non è un modo raffinato di dire la cardinalità di un insieme dato che non distingue insiemi infiniti ma che hanno diverse cardinalità.
+\end{esempio}
+
+Altri esempi di misure notevoli verranno in seguito.
+
+\begin{definizione}[Insieme trascurabile]
+Sia \((\Omega, \mathcal A, \mu)\) uno spazio di misura. Un insieme \(A \in \mathcal A\) si dice {\em trascurabile} \index{insieme!trascurabile} qualora \(\mu(A) = 0\).
+\end{definizione}
+
+\begin{lemma}\label{lemma:LimitOfMeasures}
+Sia \((\Omega, \mathcal A, \mu)\) uno spazio di misura.
+\begin{enumerate}
+\item Per ogni successione \(\set{A_n \mid n \in \enne}\) di elementi di \(\mathcal A\) tali che \(A_n \subseteq A_{n+1}\) per ogni \(n \in \enne\) si ha
+\[\mu \left( \bigcup_{n \in \enne} A_n \right) = \lim_{n \to +\infty} \mu\left(A_n\right) .\]
+\item Per ogni successione \(\set{B_n \mid n \in \enne}\) di elementi di \(\mathcal A\) tali che \(B_{n+1} \subseteq B_n\) per ogni \(n \in \enne\) e \(\mu \left( B_0 \right) < +\infty\) si ha
+\[\mu \left( \bigcap_{n \in \enne} B_n \right) = \lim_{n \to +\infty} \mu \left( B_n \right) .\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Osserviamo che qualunque sia la successione \(\set{A_n \mid n \in \enne}\), possiamo costruirne un'altra, che chiamiamo \(\set{A'_n \mid n \in \enne}\), i cui elementi sono a due a due disgiunti e la cui unione sia proprio \(\bigcup_{n \in \enne} A_n\):
+\[A'_0 : = A_0\,, \ A'_n := A_{n} - A_{n-1}.\]
+Inoltre si può provare (per induzione, per esempio) che
+\[A_n = \bigcup_{i \le n} A'_i \text{ per ogni } n \in \enne .\]
+Possiamo quindi provare il primo punto:
+\[
+\lim_{n \to +\infty} \mu \left( A_n \right) = \lim_{n \to +\infty} \mu\left( \bigcup_{i \le n} A'_i \right) = \sum_{n \in \enne} \mu \left( A'_n \right) = \mu \left( \bigcup_{n \in \enne} A'_n \right) = \mu \left( \bigcup_{n \in \enne} A_n \right).\]
+Rimane da provare il secondo punto. Consideriamo la successione \(\set{B'_n \mid n \in \enne}\) assegnata come
+\[B'_n := B_0 - B_n .\]
+Essendo \(\set{B_n \mid n \in \enne}\) decrescente, allora \(\set{B'_n \mid n \in \enne}\) è crescente. Quello che ci permette di concludere la dimostrazione è:
+\[B_0 = \bigcup_{n \in \enne} B'_n \cup \bigcap_{n \in \enne} B_n ,\]
+in cui l'unione e l'intersezione sono chiaramente disgiunti. Quindi:
+\[\mu \left( B_0 \right) = \mu \left( \bigcup_{n \in \enne} B'_n \right) + \mu \left( \bigcap_{n \in \enne} B_n \right).\]
+Nel membro a destra, il primo addendo è uguale a \(\lim_{n \to +\infty} \mu \left( B'_n \right) = \mu \left(B_0\right) - \lim_{n \to +\infty} \mu\left(B_n\right)\) per il primo punto di questa proposizione. (Abbiamo appena usato il fatto che \(\mu\left(B_0\right) < +\infty\). Precisamente dove?) Concludiamo che
+\[0 = - \lim_{n \to +\infty} \mu\left(B_n\right) + \mu \left( \bigcap_{n \in \enne} B_n \right)\]
+e cioè la tesi.
+\end{proof}

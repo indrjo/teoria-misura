@@ -1,0 +1,122 @@
+% !TEX program = lualatex
+% !TEX spellcheck = it_IT
+% !TEX root = ../TM.tex
+
+\section{Integrazione e successioni di funzioni}
+
+In questa sezione presentiamo alcuni teoremi classici riguardanti i \q{limiti sotto il segno integrale}. Probabilmente, si sono già incontrati vari teoremi di questo tipo di contenuto nel contesto delle funzioni continue. Qui, vogliamo vedere se si può generalizzare all'intera classe di funzioni misurabili.
+
+\begin{proposizione}[Teorema di Beppo-Levi, o \q{della convergenza dominata}]\label{proposizione:BeppoLevi}\index{teorema!di Beppo-Levi}
+Sia \((\Omega, \mathcal A, \mu)\) uno spazio di misura e \(\set{f_n : \Omega \to \erre \mid n \in \enne}\) una successione crescente di funzioni misurabili e non negative. Considerata la funzione
+\[ f : \Omega \to \erre \,, \ f(x) := \lim_{n \to +\infty} f_n(x) \]
+si ha
+\[\int_\Omega f \mathrm d \mu = \lim_{n \to +\infty} \int_\Omega f_n \mathrm d \mu .\]
+\end{proposizione}
+
+Vale la pena osservare che, essendo la successione di funzioni crescente, lo è anche la successione degli integrali \(\int_\Omega f \mathrm d \mu\): ragione per cui il limite \(\displaystyle\lim_{n \to +\infty} \int_\Omega f_n \mathrm d \mu\) è definito.
+
+\begin{proof}
+Poiché la successione è crescente, sia ha subito che \(\int_\Omega f_n \mathrm d \mu \le \int_\Omega f \mathrm d \mu\) e quindi la disuguaglianza
+\[\lim_{n \to +\infty} \int_\Omega f_n \mathrm d \mu \le \int_\Omega f \mathrm d \mu .\]
+Per pura comodità, \(\alpha := \lim_{n \to +\infty} \int_\Omega f_n \mathrm d \mu\). Se proviamo che \(\alpha \ge \int_\Omega s \mathrm d \mu\) per ogni funzione misurabile semplice \(s : \Omega \to \erre\) tale che \(0 \le s \le f\), possiamo dire di aver provato anche che \(\alpha \ge \int_\Omega f \mathrm d \mu\). Consideriamo infatti una qualsiasi di queste funzioni. Preso \(\delta \in (0, 1)\) gli insiemi misurabili
+\[E_n := \set{x \in \Omega \mid f_n(x) \ge \delta s(x)}\]
+sono tali che \(E_n \subseteq E_{n+1}\) per ogni \(n \in \enne\) e ricoprono \(\Omega\) (quest'ultimo è un semplice fatto pertinente i limiti di successione). Quindi
+\[\int_\Omega f_n \mathrm d \mu \ge \int_{E_n} f_n \mathrm d \mu \ge \int_{E_n} \delta s \mathrm d \mu \ge \delta \int_{E_n} s \mathrm d \mu \ge \delta \int_{\bigcup_{i=0}^n E_i} s \mathrm d \mu .\]
+Dato che ciò accade per ogni \(n \in \enne\), possiamo scrivere
+\[\int_\Omega f_n \mathrm d \mu \ge \delta \int_\Omega s \mathrm d \mu\]
+per ogni \(\delta \in (0, 1)\). Per l'arbitrarietà di \(\delta\), la tesi.
+\end{proof}
+
+\begin{corollario}
+Se due funzioni misurabili \(f, g : \Omega \to \erre\) sono integrabili, allora pure \(f+g\) lo è e
+\[\int_\Omega (f+g) \mathrm d \mu = \int_\Omega f \mathrm d \mu + \int_\Omega g \mathrm d \mu .\]
+\end{corollario}
+
+\begin{proof}
+Anzitutto, \(f+g\) è misurabile, perché lo sono i singoli addendi. Supponiamo preliminarmente \(f, g \ge 0\). Per il Lemma~\ref{lemma:FunzioniRealiLimitiPuntualiDiFunzioniSemplici}, possimao scegliere due successioni \(\set{f_n : \Omega \to \erre \mid n \in \enne}\) e \(\set{g_n : \Omega \to \erre \mid n \in \enne}\) crescenti di funzioni misurabili e non negative convergenti puntualmente a \(f\) e a \(g\) rispettivamente. Siamo nelle ipotesi della Proposizione~\ref{proposizione:BeppoLevi}, e quindi
+\[\int_\Omega (f+g) \mathrm d \mu = \lim_{n \to +\infty} \int_\Omega (f_n + g_n) \mathrm d \mu .\]
+Ora è facile verificare che \(\int_\Omega (f_n + g_n) \mathrm d \mu = \int_\Omega f_n \mathrm d \mu + \int_\Omega g_n \mathrm d \mu\). Applicando di nuovo la Proposizione~\ref{proposizione:BeppoLevi}, abbiamo
+\[\int_\Omega (f+g) \mathrm d \mu = \lim_{n \to +\infty} \int_\Omega f_n \mathrm d \mu + \lim_{n \to +\infty} \int_\Omega g_n \mathrm d \mu = \int_\Omega f \mathrm d \mu + \int_\Omega g \mathrm d \mu .\]
+In particolare, ricaviamo che la somma di sue funzioni integrabili non negative è integrabile. Possiamo a questo punto verificare pure l'integrabilità di \(f+g\) senza l'ipotesi aggiuntiva non negatività delle due funzioni. Sappiamo che \(\abs f\) e \(\abs g\) sono integrabili perché lo sono \(f\) e \(g\). Ora \(\abs{f+g} \le \abs f + \abs g\) dove
+\[\int_\Omega (\abs f + \abs g) \mathrm d \mu = \underbrace{\int_\Omega \abs f \mathrm d \mu + \int_\Omega \abs g \mathrm d \mu < +\infty}_{\text{perché \(f\) e \(g\) sono integrabili}} .\]
+La Proposizione~\ref{proposizione:SempliceCriterioIntegrabilità} ci permette di dire che \(f+g\) è integrabile.
+%Se \(f, g \le 0\), allora usando lo stesso ragionamento di poc'anzi con \(-f\) al posto di \(f\) e \(-g\) al posto di \(g\), si ottiene facilmente la tesi in questo caso. Se \(f \ge 0\) e \(g \le 0\), allora possiamo scrivere \(f+g = f-(-g)\), dove \(-g \ge 0\); si può quindi usare l'argomento appena impiegato con \(-g\) al posto di \(g\). Anche il caso \(f \le 0\) e \(g \ge 0\) si esaurisce così.
+Possiamo quindi dimostrare la proposizione nel caso generale di \(f\) e \(g\) di segno variabile, ricordando che le funzioni \(\Omega \to \erre\) possono essere scritte come differenza di funzioni non negative, \(f = f_+ - f_-\) e \(g = g_+ - g_-\). Quindi
+\begin{align*}
+\int_\Omega (f+g) \mathrm d \mu &= \int_\Omega [(f_+ + g_+) - (f_-+g_-)] \mathrm d \mu = \\
+&= \int_\Omega (f_+ + g_+) \mathrm d \mu  - \int_\Omega (f_-+g_-) \mathrm d \mu = \\
+&= \int_\Omega f_+ \mathrm d \mu + \int_\Omega g_+ \mathrm d \mu  - \int_\Omega f_- \mathrm d \mu - \int_\Omega g_- \mathrm d \mu = \\
+&= \int_\Omega f \mathrm d \mu + \int_\Omega g \mathrm d \mu 
+\end{align*}
+e abbiamo concluso.
+\end{proof}
+
+\begin{proposizione}[Teorema di Beppo-Levi II]\label{proposizione:BeppoLevi2}\index{teorema!di Beppo-Levi II}
+Sia \((\Omega, \mathcal A, \mu)\) uno spazio di misura e consideriamo una successione monotona \(\set{f_n : \Omega \to \erre \mid n \in \enne}\) di funzioni integrabili su \(E\) e tali che la successione \(\displaystyle\set{\left. \int_\Omega f_n \mathrm d \mu \right \mid n \in \enne}\) sia limitata. Presa
+\[f : \Omega \to \erre \,, \ f(x) := \lim_{n \to +\infty} f_n(x) ,\]
+si ha che \(f\) è integrabile e
+\[\int_\Omega f \mathrm d \mu = \lim_{n \to +\infty} \int_\Omega f_n \mathrm d \mu .\]
+\end{proposizione}
+
+Una delle conclusioni di questa proposizione ricorda la Proposizione~\ref{proposizione:BeppoLevi}: in più però fornisce un criterio per verificare l'integrabilità di una funzione. Questo però non viene senza fatica perché bisogna trovare una successione che di funzioni che converga puntualmente verso di lei, ma nel caso di serie può fare molto comodo.
+
+\begin{proof}[Dimostrazione Proposizione~\ref{proposizione:BeppoLevi2}]
+Supponiamo che le \(f_n\) siano crescenti, se sono decrescenti si procede analogamente. Qui \(f_n - f_0 \ge 0\) per ogni \(n \in \enne\); la successione \(\set{f_n-f_0 \mid n \in \enne}\) è crescente e di funzioni misurabili non negative. Per la Proposizione~\ref{proposizione:BeppoLevi} si ha 
+\[\lim_{n \to + \infty} \int_\Omega (f_n-f_0) \mathrm d \mu = \int_\Omega (f-f_0) \mathrm d \mu .\]
+Poiché il primo membro è finito, allora \(f-f_0\) è integrabile in \(E\), e quindi lo è pure \(f\). La conclusione è immediata. \nota{Ma quindi non serve il Lemma di Fatou?}
+\end{proof}
+
+\begin{lemma}[di Fatou]\label{lemma:Fatou}\index{lemma!di Fatou}
+Sia \((\Omega, \mathcal A, \mu)\) uno spazio di misura e prendiamo una successione \(\set{f_n : \Omega \to \erre \mid n \in \enne}\) di funzioni misurabili e non negative. Allora, preso
+\[f : \Omega \to \erre \,, \ f(x) := \liminf_{n \to +\infty} f_n(x) ,\]
+si ha
+\[\int_\Omega f \mathrm d \mu \le \liminf_{n \to +\infty} \int_\Omega f_n \mathrm d \mu .\]
+\end{lemma}
+
+Qualche volta, al posto della disuguaglianza appena scritta si scrive
+\[\int_\Omega \left(\liminf_{n \to +\infty} f_n\right) \mathrm d \mu \le \liminf_{n \to +\infty} \int_\Omega f_n \mathrm d \mu\]
+per dire che il \(\liminf_{n \to +\infty}\) non proprio si può tirare fuori dall'integrale.
+
+Per comodità, richiamiamo come è definito il {\em limite inferiore} di una successione:
+\[\liminf_{n \to +\infty} x_n := \lim_{n \to +\infty} \left(\inf_{m \ge n} x_m\right) .\]
+Ricordiamo anche che, essendo \(\set{\inf_{m \ge n} x_m \mid n \in \enne}\) una successione crescente, questo oggetto è sempre definito (finito od al più infinito). Inoltre è immediato verificare che se una successione ha limite, allora questo coincide con il suo limite inferiore.
+
+\begin{proof}[Dimostrazione del Lemma~\ref{lemma:Fatou}]
+\nota{Questa è una cosa di cui scrivere\dots{}} Sappiamo che \(f\) è misurabile; ovviamente è anche non negativa. Anche \(g_n : \Omega \to \erre\), \(g_n(x) := \inf_{m \ge n} f_m(x)\) è misurabile \nota{anche di questa cosa bisogna scrivere\dots{}}; inoltre è non negativa e crescente. Quindi
+\[\underbrace{\int_\Omega f \mathrm d \mu = \lim_{n \to +\infty} \int_\Omega g_n \mathrm d \mu}_{\text{Teorema di Beppo-Levi}} = \liminf_{n \to +\infty} \int_\Omega g_n \mathrm d \mu \le \liminf_{n \to +\infty} \int_\Omega f_n \mathrm d \mu \qedhere\]
+\end{proof}
+
+\begin{lemma}[di Fatou II]\label{lemma:Fatou2}\index{lemma!di Fatou II}
+Sia \((\Omega, \mathcal A, \mu)\) uno spazio di misura e prendiamo una successione \(\set{f_n : \Omega \to \erre \mid n \in \enne}\) di funzioni misurabili e supponiamo che esiste \(g : \Omega \to \erre\) integrabile tale che \(f_n \le g\) per ogni \(n \in \enne\). Allora, preso
+\[f : \Omega \to \erre \,, \ f(x) := \limsup_{n \to +\infty} f_n(x) ,\]
+si ha
+\[\limsup_{n \to +\infty} \int_\Omega f_n \mathrm d \mu \le \int_\Omega f \mathrm d \mu .\]
+\end{lemma}
+
+Per comodità, richiamiamo come è definito il {\em limite superiore} di una successione:
+\[\limsup_{n \to +\infty} x_n := \lim_{n \to +\infty} \left(\sup_{m \ge n} x_m\right) .\]
+Ricordiamo anche che, essendo \(\set{\inf_{m \ge n} x_m \mid n \in \enne}\) una successione decrescente, questo oggetto è sempre definito (finito od al più infinito). Inoltre è immediato verificare che se una successione ha limite, allora questo coincide con il suo limite inferiore. Una proprietà che useremo per dimostrare questo lemma è
+\[- \liminf_{n \to +\infty}\left( -x_n\right) = \limsup_{n \to +\infty} x_n . \]
+
+\begin{proof}
+La successione \(\set{g-f_n \mid n \in \enne}\) soddisfa le ipotesi del Lemma di Fatou, quindi
+\[\int_\Omega \liminf_{n \to +\infty}\left( g-f_n \right) \mathrm d \mu \le \liminf_{n \to +\infty} \int_\Omega \left( g-f_n \right) \mathrm d \mu .\]
+Ora, essendo \(\int_\Omega g \mathrm d \mu < +\infty\) per ipotesi, si ha
+\[\int_\Omega \liminf_{n \to +\infty}\left( -f_n \right) \mathrm d \mu \le \liminf_{n \to +\infty}  \left(- \int_\Omega f_n \mathrm d \mu \right) . \qedhere\]
+\end{proof}
+
+I due lemmi precedenti servono a provare un criterio che può fare molto comodo in diverse situazioni, sia teoriche che pratiche.
+
+\begin{proposizione}[Teorema di Lebesgue, o \q{della convergenza dominata}]\index{teorema!di Lebesgue}
+Sia \((\Omega, \mathcal A, \mu)\) uno spazio di misura e \(\set{f_n : \Omega \to \erre \mid n \in \enne}\) una successione di funzioni misurabili convergenti puntualmente a \(f : \Omega \to \erre\). Se esiste \(g : \Omega \to \erre\) misurabile che sia integrabile e tale che \(\abs{f_n} \le g\) per ogni \(n \in \enne\), allora \(f\) è integrabile e
+\[\int_\Omega f \mathrm d \mu = \lim_{n \to +\infty} \int_\Omega f_n \mathrm d \mu .\]
+\end{proposizione}
+
+\begin{proof}
+L'integrabilità è immediata: da ipotesi, \(\abs{f_n} \le g\) per ogni \(n \in \enne\), e quindi passando al limite per \(n \to +\infty\) si ha \(\abs f \le g\). Inoltre, poiché \(g\) è integrabile lo è anche \(f\). Ora osserviamo che se proviamo che se
+\[\lim_{n \to +\infty} \int_{\Omega} \abs{f-f_n} \mathrm d \mu = 0 ,\]
+allora l'uguaglianza dell'enunciato. Possiamo usare il Lemma di Fatou II, poiché \(\abs{f-f_n}\) è misurabile e \(\abs{f-f_n} \le 2g\) con \(2g\) integrabile: quindi
+\[\limsup_{n \to +\infty} \int_\Omega \abs{f-f_n} \mathrm d \mu \le \int_\Omega \underbrace{\limsup_{n \to +\infty} \abs{f-f_n}}_{= 0 \text{ da ipotesi}} \mathrm d \mu = 0 .\]
+Usando il Lemma di Fatou, si ha
+\[\liminf_{n \to +\infty} \int_\Omega \abs{f-f_n} \mathrm d \mu \ge \int_\Omega \underbrace{\liminf_{n \to +\infty} \abs{f-f_n}}_{= 0 \text{ per ipotesi}} \mathrm d \mu = 0 . \] E abbiamo concluso, perché i limiti inferiore e superiore coincidono.
+\end{proof}
